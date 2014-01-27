@@ -2,6 +2,8 @@ fasterror
 =========
 Quickly create custom error objects.
 
+[![Build Status](https://travis-ci.org/willwhite/fasterror.png?branch=master)](https://travis-ci.org/willwhite/fasterror)
+
 ```
 var fasterror = require('fasterror');
 var MyError = fasterror('MyError', {code: 'ENOENT'});
