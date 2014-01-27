@@ -1,7 +1,7 @@
 {
   "name": "fasterror",
   "version": "0.0.0",
-  "description": "Fast custom errors.",
+  "description": "Quickly create custom error objects.",
   "main": "index.js",
   "directories": {
     "test": "test"
