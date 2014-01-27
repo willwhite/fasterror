@@ -1,0 +1,21 @@
+{
+  "name": "fasterror",
+  "version": "0.0.0",
+  "description": "Fast custom errors.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "author": "Will White <will@mapbox.com>",
+  "license": "BSD",
+  "devDependencies": {
+    "mocha": "~1.17.1"
+  },
+  "dependencies": {
+    "underscore": "~1.5.2"
+  }
+}
