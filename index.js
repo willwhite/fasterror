@@ -1,22 +1,25 @@
-var _ = require('underscore');
+var util = require('util');
 
-module.exports = function(type, defaults) {
-    if (typeof defaults === 'string' ||
-        typeof defaults === 'number') defaults = { code: defaults };
+module.exports = fastErrorFactory;
 
-    function FastError(message, options) {
-    if (typeof options === 'string' ||
-        typeof options === 'number') options = { code: options };
-      Error.call(this);
-      Error.captureStackTrace(this, arguments.callee);
+function fastErrorFactory(name, defaults) {
+  function FastError() {
+    this.message = util.format.apply(null, arguments);
+    this.name = name;
+    Error.captureStackTrace(this, arguments.callee);
+  }
 
-      this.name = type;
-      this.constructor.name = type;
-      this.message = message || '';
+  FastError.prototype = Object.create(Error.prototype, {
+    constructor: { value: FastError }
+  });
 
-      _(this).chain().extend(defaults).extend(options);
+  if (typeof defaults === 'string' || typeof defaults === 'number') {
+    FastError.prototype.code = defaults
+  } else if (typeof defaults === 'object') {
+    for (var key in defaults) {
+      FastError.prototype[key] = defaults[key];
     }
-    FastError.prototype.__proto__ = Error.prototype;
+  }
 
-    return FastError;
-};
+  return FastError;
+}
