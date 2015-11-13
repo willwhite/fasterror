@@ -7,15 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc tape test/*.js"
   },
   "repository": "",
   "author": "Will White <will@mapbox.com>",
   "license": "BSD",
   "devDependencies": {
-    "mocha": "~1.17.1"
-  },
-  "dependencies": {
-    "underscore": "~1.5.2"
+    "nyc": "^3.2.2",
+    "tape": "^4.2.2"
   }
 }
