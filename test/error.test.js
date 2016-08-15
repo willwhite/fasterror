@@ -57,3 +57,13 @@ test('[error object] should merge with defaults from constructor', function(asse
     assert.equal(err.foo, 'bar');
     assert.end();
 });
+
+test('[error object] should be an instanceof the parent Error', function(assert) {
+    var MyError = fasterror('MyError');
+    var MyNestedError = fasterror('MyNestedError', MyError);
+    var err = new MyNestedError();
+    assert.ok(err instanceof Error);
+    assert.ok(err instanceof MyError);
+    assert.ok(err instanceof MyNestedError);
+    assert.end();
+});

@@ -2,14 +2,22 @@ var util = require('util');
 
 module.exports = fastErrorFactory;
 
-function fastErrorFactory(name, defaults) {
+function fastErrorFactory(name, defaults, Parent) {
   function FastError() {
     this.message = util.format.apply(null, arguments);
     this.name = name;
+    if (typeof Parent === 'function') {
+      Parent.apply(this, arguments);
+    }
     Error.captureStackTrace(this, arguments.callee);
   }
 
-  FastError.prototype = Object.create(Error.prototype, {
+  if (typeof defaults === 'function') {
+    Parent = defaults;
+    defaults = undefined;
+  }
+
+  FastError.prototype = Object.create((Parent || Error).prototype, {
     constructor: { value: FastError }
   });
 
