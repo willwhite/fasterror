@@ -42,6 +42,24 @@ test('[error constructor] should set default code if second argument is a number
     assert.equal(err.code, 123);
     assert.end();
 });
+test('[error constructor] should copy message and stack from constructing error', function(assert) {
+    var MyError = fasterror('MyError');
+    var sourceErr = new TypeError('bad type');
+    var err = new MyError(sourceErr);
+    assert.equal(err.message, 'bad type');
+    assert.ok(err.stack.match(/^MyError: bad type/));
+    // Is set to 47:21 to indicate it came from the `TypeError` line
+    assert.ok(err.stack.match(/error.test.js:47:21/));
+    assert.end();
+});
+test('[error constructor] should set default code for constructing error', function(assert) {
+    var MyError = fasterror('MyError', {code: 'code'});
+    var sourceErr = new TypeError('bad type');
+    var err = new MyError(sourceErr);
+    assert.equal(err.message, 'bad type');
+    assert.equal(err.code, 'code');
+    assert.end();
+});
 
 test('[error object] should perform string interpolation on provided arguments', function(assert) {
     var MyError = fasterror('MyError');
