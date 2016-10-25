@@ -47,7 +47,7 @@ test('[error constructor] should copy message and stack from constructing error'
     var sourceErr = new TypeError('bad type');
     var err = new MyError(sourceErr);
     assert.equal(err.message, 'bad type');
-    assert.ok(err.stack.match(/^MyError: bad type\n    at Test.<anonymous>/));
+    assert.ok(err.stack.match(/^MyError: bad type/));
     // Is set to 47:21 to indicate it came from the `TypeError` line
     assert.ok(err.stack.match(/error.test.js:47:21/));
     assert.end();
